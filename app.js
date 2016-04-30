@@ -122,6 +122,7 @@ app.get('/viewOrders',order.viewOrders);
 //admin graphs
 app.post('/getCustomerRideGraphDetails', admin.getCustomerRideGraphDetails);
 app.post('/getAreaRideGraphDetails', admin.getAreaRideGraphDetails);
+app.post('/getDriverRideGraphDetails', admin.getDriverRideGraphDetails);
 
 //admin bill details of customer/billid
 app.post('/getCustomerBillDetails', admin.getCustomerBillDetails);
