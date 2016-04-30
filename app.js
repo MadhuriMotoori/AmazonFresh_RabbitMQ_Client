@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-//comment changed
+//comment added to develop
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -14,7 +14,6 @@ var express = require('express')
   , farmer = require('./routes/farmer')
      ,order=require('./routes/order')
   , customer = require('./routes/customer')
-  , products =require('./routes/products');
 var passport=require('passport');
 
 

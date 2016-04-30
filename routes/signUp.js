@@ -1,6 +1,4 @@
 var mysql = require('./mysql');
-var customerDAO = require('../dbServices/customerDAO');
-var farmerDAO = require('../dbServices/farmerDAO');
 var mq_client = require('../rpc/client');
 
 function checkCustomerEmail(req, res) {

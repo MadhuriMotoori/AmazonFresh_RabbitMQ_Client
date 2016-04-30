@@ -7,7 +7,6 @@ var customer = require('../dbServices/customerDAO');
 var farmer = require('../dbServices/farmerDAO');
 //var loginDatabase = "mongodb://localhost:27017/login";
 module.exports = function(passport) {
-    console.log("hi");
     passport.use('customerlogin', new LocalStrategy(function (username, password, done) {
         process.nextTick(function () {
 
