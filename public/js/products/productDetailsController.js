@@ -14,7 +14,7 @@ routerApp.controller('productDetailsController', ['$scope','$http','$state','$lo
 	}).success(function(data){
 			if(data.statusCode===200)
 			{
-				console.log("api:/api/getProductInfo;controller:ProductDetailsController;status:success");
+				
 				$scope.product=data.result[0];
 				console.log($scope.product);
 			}
@@ -166,8 +166,8 @@ routerApp.controller('productDetailsController', ['$scope','$http','$state','$lo
 		$localStorage.ar_quantity=ar_quantity;
 		$localStorage.total_price=total_price;
 		//test
-		console.log("hi"+$localStorage.ar_farmerId);
-		console.log("ji"+$localStorage.ar_price);
+		//console.log("hi"+$localStorage.ar_farmerId);
+		//console.log("ji"+$localStorage.ar_price);
 	}
 
 

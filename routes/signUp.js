@@ -1,4 +1,3 @@
-var mysql = require('./mysql');
 var mq_client = require('../rpc/client');
 
 function checkCustomerEmail(req, res) {
