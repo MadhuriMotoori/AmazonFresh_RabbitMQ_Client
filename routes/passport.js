@@ -1,10 +1,7 @@
 var mq_client = require('../rpc/client');
-
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
-var mysql = require('./mysql');
-var customer = require('../dbServices/customerDAO');
-var farmer = require('../dbServices/farmerDAO');
+
 //var loginDatabase = "mongodb://localhost:27017/login";
 module.exports = function(passport) {
     passport.use('customerlogin', new LocalStrategy(function (username, password, done) {

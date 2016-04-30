@@ -61,7 +61,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
             {
                 console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:success");
                 $scope.customerDetails=data.result;
-                console.log()
+                //console.log()
 
                 //console.log(JSON.stringify($scope.farmerDetails));
 
@@ -202,16 +202,16 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         for(var j=0;j<items.length;j++) {
             total_price=+total_price+ +items[j].productPrice;
         }
-        console.log("total_price"+total_price);
-        console.log('productarray'+ar_productId+'farmer'+ar_farmerId+'price'+ar_price,'quantity'+ar_quantity);
+     //   console.log("total_price"+total_price);
+     //   console.log('productarray'+ar_productId+'farmer'+ar_farmerId+'price'+ar_price,'quantity'+ar_quantity);
         $localStorage.ar_productId=ar_productId;
         $localStorage.ar_farmerId=ar_farmerId;
         $localStorage.ar_price=ar_price;
         $localStorage.ar_quantity=ar_quantity;
         $localStorage.total_price=total_price;
         //test
-        console.log("hi"+$localStorage.ar_farmerId);
-        console.log("ji"+$localStorage.ar_price);
+    //    console.log("hi"+$localStorage.ar_farmerId);
+    //    console.log("ji"+$localStorage.ar_price);
     }
 
 }]);
