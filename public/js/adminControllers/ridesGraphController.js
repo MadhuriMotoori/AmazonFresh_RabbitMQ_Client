@@ -9,6 +9,8 @@ routerApp.controller('customerRidesGraphController', [ '$scope', '$http',
         $scope.area_empty_error = true;
         $scope.area_length_error = true;
         $scope.no_values = true;
+        $scope.no_trips = true;
+
         $scope.toggle = function(){
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 8,
@@ -27,6 +29,8 @@ routerApp.controller('customerRidesGraphController', [ '$scope', '$http',
                 $scope.customerselected = false;
                 $scope.areaselected = false;
                 $scope.driverselected = true;
+            } else if ($scope.userinput == "allRides"){
+                $scope.viewAllRidesGraph();
             }
         };
         // ssn errors
@@ -349,5 +353,84 @@ routerApp.controller('customerRidesGraphController', [ '$scope', '$http',
                     $scope.unexpected_error = false;
                 });
             }
+        };
+
+
+        $scope.viewAllRidesGraph = function() {
+            $scope.no_trips = true;
+                $http({
+                    method : "GET",
+                    url : '/getAllRideGraphDetails'
+                }).success(function(data) {
+                    if (data.statusCode == 401) {
+                        console.log("error:" + data.error);
+                    } else if(data.statusCode == 200) {
+
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 8,
+                            center: new google.maps.LatLng(data.results[0].deslat, data.results[0].deslong),
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        });
+                        points = data.results;
+
+                        for(var i=0; i< points.length; i++){
+                            console.log("srclat:" + points[i].srclat + "srclong:" + points[i].srclong);
+                            geocodeLineFunction(points[i].srclat, points[i].srclong,points[i].deslat, points[i].deslong);
+                        }
+
+
+                        function geocodeLineFunction(pointLat1, pointLon1,pointLat2,pointLon2)
+                        {
+                            var gc = new google.maps.Geocoder();
+
+
+
+                            var source = new google.maps.LatLng(pointLat1, pointLon1);
+
+                            // Draw a circle around the radius
+                            var circle = new google.maps.Circle({
+                                center: source,
+                                radius: 3000, //convert miles to meters
+                                strokeColor: "#0000FF",
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2,
+                                fillColor: "#0000FF",
+                                fillOpacity: 0.7
+                            });
+                            circle.setMap(map);
+
+                            var destination = new google.maps.LatLng(pointLat2, pointLon2);
+
+                            // Draw a circle around the radius
+                            var circle = new google.maps.Circle({
+                                center: destination,
+                                radius: 3000, //convert miles to meters
+                                strokeColor: "#FF0000",
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2,
+                                fillColor: "#FF0000",
+                                fillOpacity: 0.7
+                            });
+                            circle.setMap(map);
+
+                            new google.maps.Polyline({
+                                path: [
+                                    new google.maps.LatLng(pointLat1, pointLon1),
+                                    new google.maps.LatLng(pointLat2, pointLon2)
+                                ],
+                                strokeColor: '#FF0000',
+                                strokeWeight: 2,
+                                geodesic: true,
+                                map: map
+                            });
+                        }
+                    } else if (data.statusCode == 201){
+                        $scope.no_trips = false;
+
+                    }
+                }).error(function(error) {
+                    $scope.unexpected_error = false;
+                });
+
         };
     }]);

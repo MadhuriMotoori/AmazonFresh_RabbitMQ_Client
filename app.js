@@ -123,6 +123,7 @@ app.get('/viewOrders',order.viewOrders);
 app.post('/getCustomerRideGraphDetails', admin.getCustomerRideGraphDetails);
 app.post('/getAreaRideGraphDetails', admin.getAreaRideGraphDetails);
 app.post('/getDriverRideGraphDetails', admin.getDriverRideGraphDetails);
+app.get('/getAllRideGraphDetails', admin.getAllRideGraphDetails);
 
 //admin bill details of customer/billid
 app.post('/getCustomerBillDetails', admin.getCustomerBillDetails);
