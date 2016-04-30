@@ -2,7 +2,8 @@
     <div class="row" style="margin-top: 30px;">
         <div ng-init="getBills()" xmlns="http://www.w3.org/1999/html">
             <div>
-                <h1>Bill Details</h1>
+                <h1>Your Order is successfully placed</h1>
+                <h3>Bill Details</h3>
             </div>
             <div ng-repeat="bill in bills2 " >
                 <strong>Bill ID : {{bill.bill_id}}</strong><br><br>
@@ -18,14 +19,7 @@
                             <strong>Quantity:</strong>  {{col.quantity}}<br>
 
                             </br>
-                            <div ng-show="show_rating">
-                                <textarea ng-model="comment"></textarea>
-                                <input style="width:100px" type="range" ng-model="productRating" min="0" max="5" /><p>{{productRating}}</p>
-                                <a type="button" class="btn btn-success " ng-click="rateProduct(col.product_id,productRating,comment)">Rate It!</a><br><br>
-                            </div>
-                        </div>
-                        <div ng-show={{myVar}}>
-                            <a type="button" class="btn btn-success" >Give Ratings and Reviews</a><br><br>
+
                         </div>
                     </div>
                 </div>

@@ -128,13 +128,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         })
         
         .state('app.bills',{
-            url: 'billsPage',
+            url: 'bills',
             views:{
                 'header@': {
                     templateUrl: '/ejs/header3.ejs',
                 },
                 'content@': {
-                    templateUrl: '/ejs/billsPage.ejs',
+                    templateUrl: '/ejs/billPlacedPage.ejs',
                     controller: 'billsController'
                 },
                 'footer@': {
