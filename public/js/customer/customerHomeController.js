@@ -17,7 +17,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
     }*/
 
     /*testing infinite scrolling*/
-    $scope.page = 1;
+    $scope.page = 0;
     $scope.productsEmpty="";
     $scope.items = [];
     $scope.fetching = false;
@@ -64,7 +64,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
 
     $scope.getMore = function() {
         /*testing*/
-        $scope.page++;
+       /* $scope.page++;*/
         $scope.fetching = true; // Block fetching until the AJAX call returns
         /*        $http.get('/my/endpoint', { page : $scope.page }).then(function(items) {
          $scope.fetching = false;
@@ -85,6 +85,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         })
             .success(function (items) {
                 if (items.statusCode === 200) {
+                    $scope.page++;
                     $scope.fetching = false;
                     if (items.result.length>0) {
                         $scope.items = $scope.items.concat(items.result);
