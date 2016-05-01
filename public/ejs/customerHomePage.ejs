@@ -1,10 +1,11 @@
+
 <div class="container-fluid customer-main-container"  >
     <div class="row customer-row" style="margin-top:10px">
 
         <div class="col-sm-9 col-md-9"  style="border:1px solid gray">
             <div class="row row-contents">
 
-                <div class="col-sm-7" >
+                <div class="col-sm-7" style="margin-left: 88px">
                     <div  id="slides_control">
                         <div>
                             <carousel interval="myInterval">
@@ -15,55 +16,52 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="col-sm-6">
-                    <div id="slides_control">
-                        <div>
-                            <carousel interval="myInterval">
-                                <slide ng-repeat="slide in slides1" active="slide.active">
-                                    <img ng-src="{{slide.image}}">
-                                </slide>
-                            </carousel>
-                        </div>
-                    </div>
-                </div>-->
+                <!--                <div class="col-sm-6">
+                                    <div id="slides_control">
+                                        <div>
+                                            <carousel interval="myInterval">
+                                                <slide ng-repeat="slide in slides1" active="slide.active">
+                                                    <img ng-src="{{slide.image}}">
+                                                </slide>
+                                            </carousel>
+                                        </div>
+                                    </div>
+                                </div>-->
             </div><!-- sub row ends here,it we cant allocate any more space can we --->
-<div class="pull-right">
-    <a typt="button" style="color: #00AA00" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    {{currentPage+1}}/{{numberOfPages()}}
-    <a typt="button" style="color: #00AA00" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
 
             <div class="row row-contents">
                 <div class="col-sm-12 customer-products" ng-init="customerDetails">
                     <div class="container-fluid">
-                        <ul class="list-unstyled">
-                            <li ng-repeat="x in customerDetails | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <div class="container-fluid" >
+                            <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-init="getMore()" ng-click="getMore()"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span>Next</a>
+                            <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+                        </div>
+                        <ul class="list-unstyled" >
+                            <!-- <li ng-repeat="x in customerDetails | startFrom:currentPage*pageSize | limitTo:pageSize">-->
+                            <li ng-repeat="x in items">
                                 <div class="col-sm-3 product-temp" >
                                     <a type="button" class="btn" ui-sref="app.productDetails({foo:'fooval',productid:x.productId})">
-                                        <img src="{{x.image}}" class="img-responsive" alt="" />
+                                        <div class="product-image-box">
+                                            <img src="{{x.image}}" class="img-responsive" alt="" />
+                                        </div>
                                     </a>
                                     <h6 class="temp-text"><strong>${{x.productPrice}}</strong></h6>
                                     <h5 class="temp-text">{{x.productName}}</h5>
                                     <h6 class="temp-text">
                                         <a ui-sref="app.farmerProducts({foo:'fooval',farmerId:x.productVendor})">
-                                        <span style="font-color:#0accff"><u>{{x.productVendor}}</u></span>
+                                            <span style="font-color:#0accff"><u>{{x.productVendor}}</u></span>
                                         </a>
                                     </h6>
                                     <button type="button" ng-click="addToCart(x)" class="btn btn-success customer-mybtn col-sm-offset-3" name="button">Add to Cart</button>
                                 </div>
                             </li>
                         </ul>
-
-                        <!--......................-->
-
-                        <!--......................-->
                     </div>
                 </div>
             </div><!--sub row 2 ends here--->
         </div><!-- products container ends here--->
 
         <div class="col-md-3 col-sm-3" style="margin-top: 20px";>
-            <button type="button" ui-sref="app.deleteCustomer"  class="btn btn-success customer-mybtn col-sm-offset-3" name="button">Delete Account</button>
             <div class="customer-right col-md-12 customer-mycols" >
                 <div class="container-fluid checkout-temp">
                     <button type="button" ng-click="checkout()" class="btn btn-success btn-block mybtn">Proceed to Checkout</button>
