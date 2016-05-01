@@ -85,6 +85,78 @@ routerApp.controller('farmerProfileController', ['$scope','$http','$localStorage
         });
     };
 
+/*tesing*/
+    $scope.addMedia = function(){
 
+
+        $http({
+            method:'POST',
+            url:'/api/addVideo',
+            data:{
+                media: document.getElementById("hiddenvideo").value,
+
+            }
+        }).success(function(data){
+
+            if(data.statusCode===200)
+            {
+                console.log("finally success");
+
+            }
+            else
+            {
+
+            }
+
+        }).error(function(error){
+            console.log('err');
+        });
+    };
+
+    function readURLVideo(input) {
+
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profilevideo')
+                    .attr('src', e.target.result)
+                    .width(270)
+                    .height(200);
+
+                document.getElementById('hiddenvideo').value = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $scope.getVideo = function(){
+
+        $http({
+            method:'POST',
+            url:'/api/getFarmerVideo',
+            data:{
+                farmeremail:''
+
+            }
+        }).success(function(data){
+
+            if(data.statusCode===200)
+            {
+                $scope.myVideo = data.result[0].video;
+                document.getElementById("myvideo").src = data.result[0].video;
+            }
+            else
+            {
+                console.log("some other video");
+            }
+
+        }).error(function(error){
+            console.log('err');
+        });
+
+    };
 
 }]);

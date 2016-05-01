@@ -91,6 +91,20 @@ exports.getCustomerRideGraphDetails = function(req, res){
     });
 };
 
+exports.getDriverRideGraphDetails = function(req, res){
+    var msg_payload = {ssn: req.param("ssn"), reqType: "getDriverRideGraphDetails"};
+    mq_client.make_request('admin_queue',msg_payload, function(err, response){
+        res.send(response);
+    });
+};
+
+exports.getAllRideGraphDetails = function(req, res){
+    var msg_payload = {reqType: "getAllRideGraphDetails"};
+    mq_client.make_request('admin_queue',msg_payload, function(err, response){
+        res.send(response);
+    });
+};
+
 exports.getAreaRideGraphDetails = function(req, res){
     var msg_payload = {area: req.param("area"), reqType: "getAreaRideGraphDetails"};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){

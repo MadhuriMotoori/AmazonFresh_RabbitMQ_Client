@@ -2,7 +2,6 @@
 /**
  * Module dependencies.
  */
-//comment added to develop s
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -82,9 +81,11 @@ app.get('/logout',logIn.logout);
 ///api calls
 app.post('/api/getProductInfo',customer.getProductInfo);       /*get product details*/
 app.post('/api/getFarmerProducts',customer.getFarmerProducts); /*use's farmer unique value to navigate from anywpage farmer's page*/
-app.get('/api/getFarmerProducts',farmer.displayProducts);      /*displays all products*/
+app.post('/api/getAllProducts',farmer.displayProducts);      /*displays all products*/
 app.post('/api/searchProducts',customer.searchProducts);       /*searches any products based on product or vendors name or product id*/
 app.post('/api/postReview',customer.postReview);               /*product rating for now*/
+app.post('/api/addVideo',farmer.addVideo);
+app.post('/api/getFarmerVideo',farmer.getFarmerVideo);
 
 //admin approve requests
 app.get('/getCustomerRequests', admin.getCustomerRequests );
@@ -123,6 +124,8 @@ app.get('/viewOrders',order.viewOrders);
 //admin graphs
 app.post('/getCustomerRideGraphDetails', admin.getCustomerRideGraphDetails);
 app.post('/getAreaRideGraphDetails', admin.getAreaRideGraphDetails);
+app.post('/getDriverRideGraphDetails', admin.getDriverRideGraphDetails);
+app.get('/getAllRideGraphDetails', admin.getAllRideGraphDetails);
 
 //admin bill details of customer/billid
 app.post('/getCustomerBillDetails', admin.getCustomerBillDetails);

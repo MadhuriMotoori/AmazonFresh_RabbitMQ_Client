@@ -1,5 +1,8 @@
 var mq_client = require('../rpc/client');
 
+var redis = require("redis"),
+    client = redis.createClient();
+
 exports.getProductInfo = function(req,res){
 
     var msg_payload = { product_id:req.param("id"),reqType:"getProductInfo"};
@@ -9,12 +12,27 @@ exports.getProductInfo = function(req,res){
 };
 
 exports.getFarmerProducts = function(req,res){
+
+    var keyForRedis=req.param("farmerId")+":"+"farmerProducts";
+    client.get(keyForRedis, function(err, reply) {
+        // reply is null when the key is missing
+        if(reply) {
+            console.log(reply);
+            json_responses = {
+                statusCode: 200,
+                result: JSON.parse(reply),
+            };
+            res.send(json_responses);
+        }else{
+            var msg_payload = { farmer_id:req.param("farmerId"),reqType:"getProductsByFarmer"};
+            mq_client.make_request('products_queue',msg_payload, function(err, response){
+                console.log("response in client" +  response);
+                res.send(response);
+            });
+        }
+        });
+
     console.log("api:getFarmerProducts call sucessful "+ req.param("farmerId"));
-    var msg_payload = { farmer_id:req.param("farmerId"),reqType:"getProductsByFarmer"};
-    mq_client.make_request('products_queue',msg_payload, function(err, response){
-        console.log("response in client" +  response);
-        res.send(response);
-    });
 };
 
 exports.searchProducts = function(req,res){
