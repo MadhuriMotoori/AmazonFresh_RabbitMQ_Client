@@ -36,7 +36,14 @@
                                 <option value="">Type</option>
                                 <option value="customer">Customer</option>
                                 <option value="area">Area</option>
+                                <option value="driver">Driver</option>
+                                <option value="allRides">All Rides</option>
                             </select>
+                        </div>
+
+                        <div ng-hide="no_trips">
+                            <strong><font color="red">No trips for now
+                                </font></strong>
                         </div>
 
                         <div class="form-group">
@@ -83,6 +90,11 @@
                                     <strong><font color="red">SSN already exists
                                         </font></strong>
                                 </div>
+
+                                <div ng-hide="no_values">
+                                    <strong><font color="red">No rides for given customer
+                                        </font></strong>
+                                </div>
                             </div>
 
 
@@ -113,6 +125,11 @@
                                     <strong><font color="red">Please input area length with in 35 characters
                                         </font></strong>
                                 </div>
+
+                                <div ng-hide="no_values">
+                                    <strong><font color="red">No rides in the given area
+                                        </font></strong>
+                                </div>
                             </div>
                             <div class="form-group col-md-12" >
                                 <a type="button" class="btn btn-success btn-md"
@@ -121,6 +138,60 @@
                             </div>
                         </div>
                     </form>
+
+                    <form name="driverform" role="form"  style="margin-top: 80px;">
+                        <div ng-show="driverselected">
+                            <div class="form-group">
+
+                                <label> Driver SSN :</label><br>
+                                <div class="input-group">
+                                    <input type="text" name="user.customer_id_1" id="user.customer_id_1"
+                                           class="form-control" placeholder="123"
+                                           ng-model="user.customer_id_1" required/> <span
+                                            class="input-group-addon" required>-</span>
+                                    <input type="text" name="user.customer_id_2" id="user.customer_id_2"
+                                           class="form-control" placeholder="12"
+                                           ng-model="user.customer_id_2" required/> <span
+                                            class="input-group-addon" required>-</span>
+                                    <input type="text" name="user.customer_id_3" id="user.customer_id_3"
+                                           class="form-control" placeholder="1234"
+                                           ng-model="user.customer_id_3" required/>
+                                </div>
+
+                                <div ng-hide="ssn_number_error">
+                                    <strong><font color="red">Please enter numbers for SSN
+                                        </font></strong>
+                                </div>
+
+                                <div ng-hide="ssn_empty_error">
+                                    <strong><font color="red">Please enter SSN
+                                        </font></strong>
+                                </div>
+
+                                <div ng-hide="ssn_format_error">
+                                    <strong><font color="red">SSN must be in (123-12-1234) format
+                                        </font></strong>
+                                </div>
+
+                                <div ng-hide="ssn_exists_error">
+                                    <strong><font color="red">SSN already exists
+                                        </font></strong>
+                                </div>
+                            </div>
+
+                            <div ng-hide="no_values">
+                                <strong><font color="red">No rides for given driver
+                                    </font></strong>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success btn-md"
+                                        ng-disabled="driverform.$invalid" ng-click="viewDriverRidesGraph()"> View Driver Rides
+                                    Graph</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
 
                 <div class="col-md-8">

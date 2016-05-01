@@ -2,6 +2,12 @@
  * Created by raghu on 4/26/2016.
  */
 routerApp.controller('billsController', [ '$scope', '$http', '$state','$localStorage', function($scope, $http, $state,$localStorage) {
+    $scope.show_rating = false;
+
+    if($localStorage.show_flag){
+        $scope.show_rating = true;
+    }
+    
     $scope.getBills=function(){
         console.log($localStorage.order_id);
         if($localStorage.order_status=="DELIVERED") {
@@ -107,7 +113,7 @@ routerApp.controller('billsController', [ '$scope', '$http', '$state','$localSto
         }).error(function(error) {
 
         });
-    }
+    };
 
     $scope.rateProduct = function (product,rating,comment) {
         $http({

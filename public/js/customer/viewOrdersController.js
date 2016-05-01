@@ -26,6 +26,11 @@ routerApp.controller('viewOrdersController', ['$scope','$http','$localStorage','
     $scope.viewDetails=function(order_id,order_status){
       $localStorage.order_id=order_id;
       $localStorage.order_status=order_status;
+        if($localStorage.order_status == "DELIVERED"){
+                $localStorage.show_flag = true;
+        } else {
+            $localStorage.show_flag = false;
+        }
         $state.transitionTo("app.billsPage", {}, {
             reload: true,
             inherit: false,
