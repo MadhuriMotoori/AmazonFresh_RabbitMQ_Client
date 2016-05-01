@@ -273,6 +273,14 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
     //    console.log("ji"+$localStorage.ar_price);
     }
 
+    $scope.showRealAmazonPrice=function(price){
+        if(price){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 
 }]);
