@@ -6,7 +6,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
 
     $scope.addedToCartItems;
 
-    $scope.currentPage = 0;
+  /*  $scope.currentPage = 0;
     $scope.pageSize = 12;
     $scope.data = [];
     $scope.numberOfPages=function(){
@@ -14,7 +14,27 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
     }
     for (var i=0; i<45; i++) {
         $scope.data.push("x "+i);
-    }
+    }*/
+
+    /*testing infinite scrolling*/
+    $scope.page = 1;
+    $scope.productsEmpty="";
+    $scope.items = [];
+    $scope.fetching = false;
+    $scope.disabled = false;
+    /* $scope.getMore = function() {
+     $scope.page++;
+     $scope.fetching = true; // Block fetching until the AJAX call returns
+     $http.get('/my/endpoint', { page : $scope.page }).then(function(items) {
+     $scope.fetching = false;
+     if (items.length) {
+     $scope.items = $scope.items.concat(items);
+     } else {
+     $scope.disabled = true; // Disable further calls if there are no more items
+     }
+     });
+     };
+     */
 
 //TODO set courousel <-akash
     $scope.myInterval = 3000;
@@ -33,20 +53,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         }
     ];
 
-    $scope.slides1 = [
-        {
-            image: 'http://lorempixel.com/400/200/sports'
-        },
-        {
-            image: 'http://lorempixel.com/400/200/people'
-        },
-        {
-            image: 'http://lorempixel.com/400/200/'
-        },
-        {
-            image: 'http://lorempixel.com/400/200/food'
-        }
-    ];
+
 
     if($localStorage.cartObjects){
 
@@ -55,7 +62,56 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         $scope.addedToCartItems = [];
     }
 
-    $http.get('/api/getFarmerProducts')
+    $scope.getMore = function() {
+        /*testing*/
+        $scope.page++;
+        $scope.fetching = true; // Block fetching until the AJAX call returns
+        /*        $http.get('/my/endpoint', { page : $scope.page }).then(function(items) {
+         $scope.fetching = false;
+         if (items.length) {
+         $scope.items = $scope.items.concat(items);
+         } else {
+         $scope.disabled = true; // Disable further calls if there are no more items
+         }
+         });*/
+        /*endof snippet*/
+
+        $http({
+            method : "POST",
+            url: '/api/getAllProducts',
+            data: {
+                page: $scope.page
+            }
+        })
+            .success(function (items) {
+                if (items.statusCode === 200) {
+                    $scope.fetching = false;
+                    if (items.result.length>0) {
+                        $scope.items = $scope.items.concat(items.result);
+                        console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:success");
+                        //$scope.customerDetails=data.result;
+                        console.log()
+                    }
+                    else {
+                        $scope.disabled = true;
+                        console.log("hello test");
+                        $scope.productsEmpty = "disabled";
+                    }
+                    //console.log(JSON.stringify($scope.farmerDetails));
+
+                }
+                else {
+                    console.log("some other error");
+                }
+
+            })
+            .error(function (err) {
+                console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:error" + err);
+            });
+
+    };
+
+    /*$http.get('/api/getFarmerProducts')
         .success(function(data){
             if(data.statusCode===200)
             {
@@ -75,6 +131,8 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         .error(function(err){
             console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:error" + err);
         });
+
+     */
 
     $scope.addToCart=function(product) {
 
@@ -213,5 +271,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
     //    console.log("hi"+$localStorage.ar_farmerId);
     //    console.log("ji"+$localStorage.ar_price);
     }
+
+
 
 }]);

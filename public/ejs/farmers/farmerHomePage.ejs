@@ -116,6 +116,52 @@
                     </div>
                 </fieldset>
             </form>
+        <!--</div>
+    </div>
+</div>-->
+            <div>
+                <br>
+                <h3>Add a Video.</h3>
+                <input type="file" accept="video/*" value="Upload profilevid"
+                       class="btn btn-success" name="profilevideo"
+                       onchange="readURLVideo(this)"> <br />
+            </div>
+            <div>
+                <video id="profilevideo" style="height: 200px; width: 220px;"
+                       controls src="movie.mp4">
+                </video>
+                <br />
+
+            </div>
+            <input type="hidden" name="hiddenvideo" id="hiddenvideo" />
+            <a type="button" class="btn btn-success" ng-click="addMedia()">upload</a>
+            <a type="button" class="btn btn-success" ng-click="getVideo()">get Video</a>
+            <video id="myvideo" style="height: 200px; width: 220px;"
+                   controls src="movie.mp4">
+            </video>
+
+            <!-- <video data-ng-src="{{myVideo}}"></video>-->
         </div>
     </div>
 </div>
+<script>
+    function readURLVideo(input) {
+
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profilevideo')
+                        .attr('src', e.target.result)
+                        .width(270)
+                        .height(200);
+
+                document.getElementById('hiddenvideo').value = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
