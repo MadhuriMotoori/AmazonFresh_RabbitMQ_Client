@@ -1,7 +1,7 @@
 var mq_client = require('../rpc/client');
 
 exports.displayProducts = function(req,res){
-    var msg_payload = { reqType:"displayAllProducts"};
+    var msg_payload = { reqType:"displayAllProducts","page":req.param("page")};
         mq_client.make_request('products_queue',msg_payload, function(err, response){
         res.send(response);
     });
@@ -9,6 +9,21 @@ exports.displayProducts = function(req,res){
 
 exports.getFarmerDetails = function(req, res){
     var msg_payload = { farmer_email:req.session.farmer,reqType:"getFarmerDetails"};
+    mq_client.make_request('farmers_queue',msg_payload, function(err, response){
+        res.send(response);
+    });
+};
+/*testing*/
+exports.addVideo = function(req, res){
+    var msg_payload = { farmer_email:req.session.farmer,reqType:"addFarmerVideo",video:req.param("media")};
+    mq_client.make_request('farmers_queue',msg_payload, function(err, response){
+        res.send(response);
+    });
+};
+
+
+exports.getFarmerVideo = function(req, res){
+    var msg_payload = { farmer_email:req.session.farmer,reqType:"getFarmerVideo"};
     mq_client.make_request('farmers_queue',msg_payload, function(err, response){
         res.send(response);
     });
