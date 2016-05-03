@@ -64,6 +64,11 @@
                                            ng-model="user.customer_id_3" required/>
                                 </div>
 
+                                <div ng-show="no_customer_bills">
+                                    <strong><font color="red">No bills exists for given customer
+                                        </font></strong>
+                                </div>
+
                                 <div ng-hide="ssn_number_error">
                                     <strong><font color="red">Please enter numbers for SSN
                                         </font></strong>
@@ -83,6 +88,7 @@
                                     <strong><font color="red">No Customer exists for given ssn
                                         </font></strong>
                                 </div>
+
                             </div>
 
 
@@ -91,7 +97,7 @@
                                         ng-disabled="customerform.$invalid" ng-click="viewCustomerBillDetails()"> View Customer Bill
                                     Details</button>
                                 <div ng-show="no_customer_bills">
-                                    <strong><font color="red">No bills exists for given customer
+                                    <strong><font color="red">No bills exists for given bill id
                                         </font></strong>
                                 </div>
                                 <div ng-show="unexpected_error">

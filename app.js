@@ -88,17 +88,17 @@ app.post('/api/addVideo',farmer.addVideo);
 app.post('/api/getFarmerVideo',farmer.getFarmerVideo);
 
 //admin approve requests
-app.get('/getCustomerRequests', admin.getCustomerRequests );
-app.get('/getFarmerRequests', admin.getFarmerRequests);
-app.get('/getProductRequests', admin.getProductRequests);
+app.post('/getCustomerRequests', admin.getCustomerRequests );
+app.post('/getFarmerRequests', admin.getFarmerRequests);
+app.post('/getProductRequests', admin.getProductRequests);
 app.post('/approveFarmer', admin.approveFarmer);
 app.post('/approveCustomer', admin.approveCustomer);
 app.post('/approveProduct', admin.approveProduct);
 
 //admin module - information about all products, customers, farmers
-app.get('/getAllFarmers', admin.getAllFarmers);
-app.get('/getAllProducts', admin.getAllProducts);
-app.get('/getAllCustomers', admin.getAllCustomers);
+app.post('/getAllFarmers', admin.getAllFarmers);
+app.post('/getAllProducts', admin.getAllProducts);
+app.post('/getAllCustomers', admin.getAllCustomers);
 
 //getfarmervalues
 app.get('/getFarmerDetails', farmer.getFarmerDetails);
