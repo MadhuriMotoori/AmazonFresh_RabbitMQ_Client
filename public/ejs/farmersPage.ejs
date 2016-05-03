@@ -3,9 +3,12 @@
         <div class="col-sm-2">
 
         </div>
-
-        <div class="col-sm-7 farmer-products" ng-init="images">
-            <div class="container-fluid">
+        <div class="container-fluid"  ng-init="loadMore()" >
+            <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-click="loadMore()"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span>Next</a>
+            <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+        </div>
+        <div class="col-sm-7 farmer-products"  ng-init="images">
+            <div class="container-fluid" >
                 <ul class="list-unstyled">
 
                     <li ng-repeat="x in images">

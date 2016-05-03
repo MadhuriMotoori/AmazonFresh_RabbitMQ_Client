@@ -24,7 +24,7 @@ exports.getFarmerProducts = function(req,res){
             };
             res.send(json_responses);
         }else{
-            var msg_payload = { farmer_id:req.param("farmerId"),reqType:"getProductsByFarmer"};
+            var msg_payload = { farmer_id:req.param("farmerId"),page:req.param("page"),reqType:"getProductsByFarmer"};
             mq_client.make_request('products_queue',msg_payload, function(err, response){
                 console.log("response in client" +  response);
                 res.send(response);
