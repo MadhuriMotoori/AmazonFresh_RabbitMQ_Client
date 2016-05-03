@@ -4,15 +4,23 @@ routerApp.controller('approveCustomerRequestsController', [ '$scope', '$http', '
         $scope.customer_requests = false;
         $scope.showCustomerFlag = true;
 
+        $scope.customers= [];
+        $scope.page = 0;
+        $scope.productsEmpty="";
+
         $scope.currentValue = function(customer){
             $scope.currentCustomer = customer;
         };
 
 
         $scope.showCustomerRequests = function(){
+            $scope.fetching = true;
             $http({
-                method : "GET",
+                method : "POST",
                 url : '/getCustomerRequests',
+                data: {
+                    page: $scope.page
+                }
             }).success(function(data) {
                 if (data.statusCode == 401) {
                     $scope.database_error = true;
@@ -21,7 +29,15 @@ routerApp.controller('approveCustomerRequestsController', [ '$scope', '$http', '
                     $scope.database_error = false;
                     $scope.customer_requests = true;
                 } else {
-                    $scope.customers = data.customers;
+                    $scope.fetching = false;
+                    $scope.page++;
+                    if (data.customers.length>0) {
+                        $scope.customers = $scope.customers.concat(data.customers);
+                    }
+                    else {
+                        $scope.disabled = true;
+                        $scope.productsEmpty = "disabled";
+                    }
                 }
             }).error(function(error) {
                 $scope.unexpected_error = false;
@@ -61,15 +77,23 @@ routerApp.controller('approveFarmerRequestsController', [ '$scope', '$http', '$s
         $scope.farmer_requests = false;
         $scope.showFarmerFlag = true;
 
+        $scope.farmers= [];
+        $scope.page = 0;
+        $scope.productsEmpty="";
+
         $scope.currentValue = function(farmer){
             $scope.currentFarmer = farmer;
         };
 
 
         $scope.showFarmerRequests = function(){
+            $scope.fetching = true;
             $http({
-                method : "GET",
+                method : "POST",
                 url : '/getFarmerRequests',
+                data: {
+                    page: $scope.page
+                }
             }).success(function(data) {
                 if (data.statusCode == 401) {
                     $scope.database_error = true;
@@ -78,7 +102,15 @@ routerApp.controller('approveFarmerRequestsController', [ '$scope', '$http', '$s
                     $scope.database_error = false;
                     $scope.farmer_requests = true;
                 } else {
-                    $scope.farmers = data.farmers;
+                    $scope.fetching = false;
+                    $scope.page++;
+                    if (data.farmers.length>0) {
+                        $scope.farmers = $scope.farmers.concat(data.farmers);
+                    }
+                    else {
+                        $scope.disabled = true;
+                        $scope.productsEmpty = "disabled";
+                    }
                 }
             }).error(function(error) {
                 $scope.unexpected_error = false;
@@ -118,15 +150,23 @@ routerApp.controller('approveProductRequestsController', [ '$scope', '$http', '$
         $scope.product_requests = false;
         $scope.showProductFlag = true;
 
+        $scope.products= [];
+        $scope.page = 0;
+        $scope.productsEmpty="";
+
         $scope.currentValue = function(product){
             $scope.currentProduct = product;
         };
 
 
         $scope.showProductRequests = function(){
+            $scope.fetching = true;
             $http({
-                method : "GET",
+                method : "POST",
                 url : '/getProductRequests',
+                data : {
+                    "page" : $scope.page
+                }
             }).success(function(data) {
                 if (data.statusCode == 401) {
                     $scope.database_error = true;
@@ -135,7 +175,15 @@ routerApp.controller('approveProductRequestsController', [ '$scope', '$http', '$
                     $scope.database_error = false;
                     $scope.product_requests = true;
                 } else {
-                    $scope.products = data.products;
+                    $scope.fetching = false;
+                    $scope.page++;
+                    if (data.products.length>0) {
+                        $scope.products = $scope.products.concat(data.products);
+                    }
+                    else {
+                        $scope.disabled = true;
+                        $scope.productsEmpty = "disabled";
+                    }
                 }
             }).error(function(error) {
                 $scope.unexpected_error = false;

@@ -1,14 +1,14 @@
 var mq_client = require('../rpc/client');
 
 exports.getCustomerRequests = function(req, res){
-    var msg_payload = {reqType:"getCustomerRequests"};
+    var msg_payload = {reqType:"getCustomerRequests",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
 };
 
 exports.getFarmerRequests = function(req, res){
-    var msg_payload = {reqType: "getFarmerRequests"};
+    var msg_payload = {reqType: "getFarmerRequests",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
@@ -23,7 +23,7 @@ exports.getProductReviews=function(req,res){
 };
 
 exports.getProductRequests = function(req, res){
-    var msg_payload = {reqType: "getProductRequests"};
+    var msg_payload = {reqType: "getProductRequests",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
@@ -62,7 +62,7 @@ exports.getRevenuePerDay=function(req,res){
 };
 
 exports.getAllFarmers = function(req, res){
-    var msg_payload = {reqType: "getAllFarmers"};
+    var msg_payload = {reqType: "getAllFarmers",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
@@ -70,7 +70,7 @@ exports.getAllFarmers = function(req, res){
 
 
 exports.getAllProducts = function(req, res){
-    var msg_payload = {reqType: "getAllProducts"};
+    var msg_payload = {reqType: "getAllProducts",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
@@ -78,7 +78,7 @@ exports.getAllProducts = function(req, res){
 
 
 exports.getAllCustomers = function(req, res){
-    var msg_payload = {reqType: "getAllCustomers"};
+    var msg_payload = {reqType: "getAllCustomers",  page: req.param("page")};
     mq_client.make_request('admin_queue',msg_payload, function(err, response){
         res.send(response);
     });
