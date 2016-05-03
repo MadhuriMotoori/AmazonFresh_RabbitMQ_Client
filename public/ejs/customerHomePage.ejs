@@ -46,6 +46,7 @@
                                         </div>
                                     </a>
                                     <h6 class="temp-text"><strong>${{x.productPrice}}</strong></h6>
+                                    <h6 class="temp-text" ng-if="showRealAmazonPrice(x.amazonPrice)"><strong>Amazon Price:${{x.amazonPrice}}</strong></h6>
                                     <h5 class="temp-text">{{x.productName}}</h5>
                                     <h6 class="temp-text">
                                         <a ui-sref="app.farmerProducts({foo:'fooval',farmerId:x.productVendor})">

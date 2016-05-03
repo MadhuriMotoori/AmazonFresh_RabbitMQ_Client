@@ -64,7 +64,7 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
 
     $scope.getMore = function() {
         /*testing*/
-       /* $scope.page++;*/
+        //$scope.page++;
         $scope.fetching = true; // Block fetching until the AJAX call returns
         /*        $http.get('/my/endpoint', { page : $scope.page }).then(function(items) {
          $scope.fetching = false;
@@ -85,8 +85,8 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         })
             .success(function (items) {
                 if (items.statusCode === 200) {
-                    $scope.page++;
                     $scope.fetching = false;
+                    $scope.page++;
                     if (items.result.length>0) {
                         $scope.items = $scope.items.concat(items.result);
                         console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:success");
@@ -271,6 +271,14 @@ routerApp.controller('customerHomeController', ['$scope','$http','$localStorage'
         //test
     //    console.log("hi"+$localStorage.ar_farmerId);
     //    console.log("ji"+$localStorage.ar_price);
+    }
+
+    $scope.showRealAmazonPrice=function(price){
+        if(price){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

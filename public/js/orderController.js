@@ -57,6 +57,7 @@ routerApp.controller('orderController', ['$scope','$state','$http','$localStorag
             }
         }).success(function (data) {
             console.log("from order controller"+ data);
+            $localStorage.cartObjects='';
             $localStorage.order_id=data;
             $state.transitionTo("app.bills", {}, {
                 reload: true,
