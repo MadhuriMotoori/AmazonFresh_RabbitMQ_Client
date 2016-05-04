@@ -349,4 +349,20 @@ routerApp.controller('farmerProductsController', ['$scope','$state','$http','$lo
         });
     };
 
+    $scope.logout=function(){
+        $localStorage.cartObjects='';
+
+        $http({
+            method: "GET",
+            url: "/logout"
+        }).success(function (data) {
+            window.location.assign("/");
+
+        }).error(function (error){
+            console.log(error);
+        });
+
+
+    }
+
 }]);
