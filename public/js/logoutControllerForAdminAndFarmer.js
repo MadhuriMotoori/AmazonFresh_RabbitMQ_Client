@@ -7,7 +7,6 @@ routerApp.controller('logoutControllerForAdminAndFarmer', ['$scope','$state','$h
 
 
 $scope.logout=function(){
-    alert("Hi");
 
     $http({
         method: "GET",
