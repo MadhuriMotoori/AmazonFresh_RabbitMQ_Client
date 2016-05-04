@@ -229,3 +229,22 @@ ul.rating {
     color: green;
 }
 
+.product-temp{
+    border : 1px solid grey;
+    width: 200px;
+    height: 300px;
+    margin: 4px;
+}
+
+.product-image-box{
+    height: 150px;
+}
+
+.temp-text{
+    text-align: center;
+}
+
+.customer-products{
+    margin-left:70px;
+}
+

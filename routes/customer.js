@@ -37,7 +37,7 @@ exports.getFarmerProducts = function(req,res){
 
 exports.searchProducts = function(req,res){
   console.log("api:serachProducts call sucessfull" + req.param("search"));
-    var msg_payload = { search:req.param("search"),reqType:"searchProducts"};
+    var msg_payload = { search:req.param("search"),page:req.param("searchPage"),reqType:"searchProducts"};
     mq_client.make_request('products_queue',msg_payload, function(err, response){
         res.send(response);
     });
