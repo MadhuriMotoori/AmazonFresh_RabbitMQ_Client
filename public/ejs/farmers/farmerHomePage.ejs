@@ -16,10 +16,12 @@
                     <a ng-click="select(5)" aria-controls="delete account" role="tab"
                        ui-sref="app.farmerDeleteAccount">Delete Account</a></li>
             </ul>
-        </div>
+        </div><!--nav bar ends here-->
+
         <div class="col-md-9" ng-controller="farmerProfileController">
 
-            <form class="form-horizontal" ng-submit="updateFarmerProfile()">
+            <div class="col-md-8">
+                <form class="form-horizontal" ng-submit="updateFarmerProfile()">
                 <fieldset>
 
                     <!-- Form Name -->
@@ -116,34 +118,28 @@
                     </div>
                 </fieldset>
             </form>
-        <!--</div>
-    </div>
-</div>-->
-            <div>
-                <br>
+            </div>
+
+            <div class="col-md-4">
                 <h3>Add a Video.</h3>
+
                 <input type="file" accept="video/*" value="Upload profilevid"
                        class="btn btn-success" name="profilevideo"
                        onchange="readURLVideo(this)"> <br />
-            </div>
-            <div>
-                <video id="profilevideo" style="height: 200px; width: 220px;"
+<!--                <video id="profilevideo" style="height: 200px; width: 220px;"
                        controls src="movie.mp4">
-                </video>
-                <br />
+                </video>-->
 
             </div>
             <input type="hidden" name="hiddenvideo" id="hiddenvideo" />
             <a type="button" class="btn btn-success" ng-click="addMedia()">upload</a>
-            <a type="button" class="btn btn-success" ng-click="getVideo()">get Video</a>
+            <a type="button" class="btn btn-success" ng-init="getVideo()">get Video</a>
             <video id="myvideo" style="height: 200px; width: 220px;"
                    controls src="movie.mp4">
             </video>
-
-            <!-- <video data-ng-src="{{myVideo}}"></video>-->
         </div>
-    </div>
-</div>
+    </div><!--row ends here-->
+</div><!--main container ends here-->
 <script>
     function readURLVideo(input) {
 
@@ -152,7 +148,7 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#profilevideo')
+                $('#myvideo')
                         .attr('src', e.target.result)
                         .width(270)
                         .height(200);

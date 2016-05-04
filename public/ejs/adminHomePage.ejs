@@ -38,7 +38,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div  ng-show="showCustomerFlag" class="requestscontainer" ng-init="showCustomerRequests()">
+                        <div  ng-show="showCustomerFlag" class="requestscontainer">
+                            <div >
+                                <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-init="showCustomerRequests()" ng-click="showCustomerRequests()"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span>Next</a>
+                                <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+                            </div>
                             <ul ng-repeat="customer in customers">
                                 <li>
                                     <button class="btn requestbutton" data-toggle="modal"
@@ -93,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" ng-controller="approveFarmerRequestsController" ng-init="showFarmerRequests()">
+                <div class="col-md-4" ng-controller="approveFarmerRequestsController" >
                     <div class="row">
                         <button  class="btn btn-md btn-success pull-right" type="button" ng-click="toggleButton()" >
                             {{showFarmerFlag ? 'Hide Farmer Approval Requests' :'View Farmer Approval Requests'}}
@@ -108,9 +112,13 @@
                     </div>
                     <div class="row">
                         <div ng-show="showFarmerFlag" class="requestscontainer" >
+                            <div >
+                                <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-init="showFarmerRequests()" ng-click="showFarmerRequests()"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span>Next</a>
+                                <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+                            </div>
                             <ul ng-repeat="farmer in farmers">
                                 <li>
-                                    <button class="btn " data-toggle="modal"
+                                    <button class="btn requestbutton" data-toggle="modal"
                                             data-target="#farmerRequests" ng-click="currentValue(farmer)">{{farmer.firstname}} {{farmer.lastname}}</button>
                                     <div id="farmerRequests" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
@@ -180,7 +188,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div  ng-show="showProductFlag" class="requestscontainer" ng-init="showProductRequests()">
+                        <div  ng-show="showProductFlag" class="requestscontainer">
+                            <div >
+                                <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-init="showProductRequests()" ng-click="showProductRequests()"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span>Next</a>
+                                <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+                            </div>
                             <ul ng-repeat="product in products">
                                 <li>
                                     <button class="btn requestbutton" data-toggle="modal"

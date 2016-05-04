@@ -128,7 +128,8 @@ exports.redirectToAdminHomepage = function(req,res)
 exports.logout = function(req,res)
 {
     req.session.destroy();
-    res.redirect('/');
+    res.send({status:200});
+    //res.redirect('/');
 };
 exports.customerLogIn = customerLogIn;
 exports.farmerLogIn = farmerLogIn;
