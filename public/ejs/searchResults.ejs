@@ -4,7 +4,11 @@
 
         </div>
 
-        <div class="col-sm-7 farmer-products" ng-init="searchResults">
+        <div class="col-sm-7 farmer-products" >
+            <div class="container-fluid" ng-init="searchMore()" >
+                <a type="button" class="btn pull-right {{productsEmpty}}" style="color: #0066bb;margin-right: 100px" ng-click="searchMore()">Next<span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span></a>
+                <!--<div ng-hide="{{disabled}}" style="color: red">There are no more products</div>-->
+            </div>
             <div class="container-fluid">
                 <ul class="list-unstyled">
 

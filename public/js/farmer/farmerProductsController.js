@@ -8,31 +8,42 @@ routerApp.controller('farmerProductsController', ['$scope','$state','$http','$lo
     var farmerId=$state.params.farmerId;
     var key = $state.params.key;
 
-
+    $scope.searchPage = 0;
     if(key!=undefined){
 
-        $http({
-            url:'/api/searchProducts',
-            method:'POST',
-            data:{
-                "search":key
-            }
-        }).success(function(data){
-                if(data.statusCode===200)
-                {
-                    console.log("api:searchProducts;controller:farmerProductsController;status:success" );
-                    $scope.searchResults=data.result;
-                    $scope.message = data.defaultMsg;
-                }
-                else
-                {
-                    console.log("some other error");
-                }
 
-            })
-            .error(function(err){
-                console.log("api:searchProducts;controller:farmerProductsController;status:error" + err);
-            });
+        $scope.searchResults = [];
+
+        $scope.searchMore = function(){
+            $http({
+                url: '/api/searchProducts',
+                method: 'POST',
+                data: {
+                    "search": key,
+                    "searchPage": $scope.searchPage
+                }
+            }).success(function (data) {
+                    if (data.statusCode === 200) {
+                        $scope.searchPage++;
+                        if (data.result.length > 0) {
+                            $scope.searchResults = $scope.searchResults.concat(data.result);
+                            console.log("api:/api/searchProducts;controller:farmerProductsController;status:success");
+                        }
+                        else {
+                            $scope.disabled = true;
+                            $scope.message = data.defaultMsg;
+                        }
+
+                    }
+                    else {
+                        console.log("some other error");
+                    }
+
+                })
+                .error(function (err) {
+                    console.log("api:searchProducts;controller:farmerProductsController;status:error" + err);
+                });
+        };
     }
 
 
@@ -43,7 +54,7 @@ routerApp.controller('farmerProductsController', ['$scope','$state','$http','$lo
         $scope.addedToCartItems = [];
     }
 
-    $http({
+/*    $http({
             url:'/api/getFarmerProducts',
             method:'POST',
             data:{
@@ -63,7 +74,56 @@ routerApp.controller('farmerProductsController', ['$scope','$state','$http','$lo
              })
             .error(function(err){
                 console.log("api:getFarmerProducts;controller:farmerProductsController;status:error" + err);
-             });
+             });*/
+
+    $scope.page = 0;
+    $scope.productsEmpty="";
+    $scope.images = [];
+    $scope.fetching = false;
+    $scope.disabled = false;
+
+    $scope.loadMore = function(){
+
+        $scope.fetching = true;
+
+        $http({
+            url:'/api/getFarmerProducts',
+            method:'POST',
+            data:{
+                "farmerId":farmerId,
+                "page":$scope.page
+            }
+        }).success(function(data){
+                $scope.fetching = false;
+                $scope.page++;
+
+
+                if(data.statusCode===200)
+                {
+                    if (data.result.length>0) {
+                        $scope.images = $scope.images.concat(data.result);
+                        console.log("api:/api/getFarmerProducts;controller:customerHomeController;status:success");
+                        //$scope.customerDetails=data.result;
+                        console.log()
+                    }
+                    else {
+                        $scope.disabled = true;
+                       // console.log("hello test");
+                        $scope.productsEmpty = "disabled";
+                    }
+                    //console.log("api:getFarmerProducts;controller:farmerProductsController;status:success" );
+                    //$scope.images=data.result;
+                }
+                else
+                {
+                    console.log("some other error");
+                }
+
+            })
+            .error(function(err){
+                console.log("api:getFarmerProducts;controller:farmerProductsController;status:error" + err);
+            });
+    };
 
     $scope.addToCart=function(product) {
 
